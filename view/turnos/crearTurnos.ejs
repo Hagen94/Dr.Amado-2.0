@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Turno</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+<main>
+<div class="contenedorModificarTurno">
+    <h1>MODIFICAR TURNO</h1>
+    <form action="/updateTurno" method="post">
+    <ul>
+        <li>
+            <label for="fecha">FECHA</label>
+            <input type="date" name="fecha" id="fecha">
+        </li>
+        <li>
+            <label for="hora">HORA</label>
+            <input type="time" name="hora" id="hora">
+        </li>
+        <li>
+            <label for="pacienteId">ID DEL PACIENTE</label>
+            <input type="number" name="pacienteId" id="pacienteId">
+        </li>
+        <li>
+            <label for="estadoId">ID DEL ESTADO</label>
+            <input type="number" name="estadoId" id="estadoId">
+        </li>
+        <!-- Puedes agregar más campos aquí si es necesario -->
+        <li>
+            <button type="submit">MODIFICAR</button>
+        </li>
+    </ul>
+</div>
+</main>
+</body>
+</html>

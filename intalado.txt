@@ -1,0 +1,24 @@
+instale
+
+npm init
+creo el servidor con express
+npm install express --save
+
+instalo ejs
+npm install ejs
+
+usamos expres router para manejar las rutas
+
+instalo dotenv 
+npm install dotenv
+
+instalamos mysql2
+
+npm install mysql2
+
+instalo method override para sobreescribir metodos no soportados
+npm install method-override
+
+instalo full calendar
+
+npm install fullcalendar

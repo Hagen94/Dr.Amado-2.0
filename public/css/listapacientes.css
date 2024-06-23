@@ -1,0 +1,52 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+}
+
+.contenedorpacientes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #53B7B9;
+    width: 100vw;
+  
+
+}
+.buscador{
+    padding: 1rem;
+    background-color: #fff;
+    margin: 1rem;
+}
+.buscador form{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    border-radius: 5%;
+}
+
+.listaPacientes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;    
+    height: auto;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 5%;
+}
+
+.agregarProductos, .headerTable, .tableAdmin .row{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+}
+
+.tableAdmin .row, .headerTable{
+    width: 100%;
+   justify-content: space-between;
+   border: 0.1rem solid black;
+}

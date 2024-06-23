@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+<main>
+<div class="contenedorEditarUsuario">
+    <h1>EDITAR USUARIO</h1>
+    <form action="/crearUsuario" method="post">
+    <ul>
+        <li>
+            <label for="nombre">NOMBRE</label>
+            <input type="text" name="nombre" id="nombre">
+        </li>
+        <li>
+            <label for="clave">CLAVE</label>
+            <input type="password" name="clave" id="clave">
+        </li>
+        <li>
+            <label for="estadoId">ID DEL ESTADO</label>
+            <input type="number" name="estadoId" id="estadoId">
+        </li>
+        <li>
+            <label for="perfilId">ID DEL PERFIL</label>
+            <input type="number" name="perfilId" id="perfilId">
+        </li>
+        <!-- Puedes agregar más campos aquí si es necesario -->
+        <li>
+            <button type="submit">GUARDAR CAMBIOS</button>
+        </li>
+    </ul>
+</div>
+</main>
+</body>
+</html>

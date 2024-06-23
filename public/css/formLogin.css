@@ -1,0 +1,33 @@
+
+
+li{
+    list-style: none;
+}
+li a{
+    text-decoration: none;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 2rem;
+}
+
+form ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+ form ul li{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+ form ul li input{
+    border: none;
+    border-bottom: 0.1rem solid #69D3D6;
+}

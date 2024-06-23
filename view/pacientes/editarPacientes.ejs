@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Paciente</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+<main>
+<div class="contenedorEditarPaciente">
+    <h1>EDITAR PACIENTE</h1>
+    <form action="/updatePaciente" method="post">
+    <ul>
+        <li>
+            <label for="nombre">NOMBRE</label>
+            <input type="text" name="nombre" id="nombre" value="<%= paciente.Nombre %>">
+        </li>
+        <li>
+            <label for="dni">DNI</label>
+            <input type="text" name="dni" id="dni" value="<%= paciente.DNI %>">
+        </li>
+        <li>
+            <label for="obraSocialId">ID DE OBRA SOCIAL</label>
+            <input type="number" name="obraSocialId" id="obraSocialId" value="<%= paciente.ObraSocialId %>">
+        </li>
+        <li>
+            <label for="numeroAsociado">NUMERO ASOCIADO</label>
+            <input type="text" name="numeroAsociado" id="numeroAsociado" value="<%= paciente.NumeroAsociado %>">
+        </li>
+        <li>
+            <label for="direccion">DIRECCION</label>
+            <input type="text" name="direccion" id="direccion" value="<%= paciente.Direccion %>">
+        </li>
+        <li>
+            <label for="telefono">TELEFONO</label>
+            <input type="text" name="telefono" id="telefono" value="<%= paciente.Telefono %>">
+        </li>
+        <!-- Puedes agregar más campos aquí si es necesario -->
+        <li>
+            <button type="submit">GUARDAR CAMBIOS</button>
+        </li>
+    </ul>
+</div>
+</main>
+</body>
+</html>

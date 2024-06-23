@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+<main>
+<div class="contenedorCrearPaciente">
+    <h1>CREAR PACIENTE</h1>
+    <form action="/createPaciente" method="post">
+    <ul>
+        <li>
+            <label for="nombre">NOMBRE</label>
+            <input type="text" name="nombre" id="nombre">
+        </li>
+        <li>
+            <label for="dni">DNI</label>
+            <input type="text" name="dni" id="dni">
+        </li>
+        <li>
+            <label for="obraSocial">OBRA SOCIAL</label>
+            <input type="text" name="obraSocial" id="obraSocial">
+        </li>
+        <li>
+            <label for="numeroAsociado">NUMERO ASOCIADO</label>
+            <input type="number" name="numeroAsociado" id="numeroAsociado">
+        </li>
+        <li>
+            <label for="direccion">DIRECCION</label>
+            <input type="text" name="direccion" id="direccion">
+        </li>
+        <li>
+            <label for="telefono">TELEFONO</label>
+            <input type="text" name="telefono" id="telefono">
+        </li>
+        <li>
+            <button type="submit">CREAR</button>
+        </li>
+    </ul>
+</div>
+</main>
+</body>
+</html>
