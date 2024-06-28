@@ -1,41 +1,38 @@
-
-.contenedorPacientes{
+.buscador{
+    margin-top: 1rem;
+}
+.agregarUsuarios{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+.agregarUsuarios .listado{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+}
+.contenedorUsuarios{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.2rem;
-}
-.listaPacientes{
-    width: 70%;
-}
-.buscador{
-    margin-top: 1rem;
-}
+    width: 100vw;
 
-.agregarPacientes{
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-}
-.agregarPacientes .listado{
-    text-align: center;
-    font-weight: bold;
-    font-size: 2em;
 }
 
 .headerTable, .tableRow{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
     grid-template-rows: auto;
-    gap: 0.2rem;
+    gap: 4rem;
     font-size: 1.5em;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     border: .1rem solid black;
     padding: 0.5rem;
     border-radius: 0.5rem;
     
-}   
+}
 .headerTable{
     font-weight: bold;
     background-color: white;

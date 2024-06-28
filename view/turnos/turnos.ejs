@@ -4,63 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Turnos</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/turnos.css">
 </head>
 <body>
   <%- include('../partials/header.ejs') %>
-
     
-    <div class="contenedorturnos">
+     <div class="contenedorturnos">
         <section class="buscador">
-            <form action="" method="get">
-            <iconify-icon class="admin__icon" icon="charm:search"></iconify-icon>
-             <input
-             name="filtro"
-             type="text"
-             id="codigoProducto"
-            placeholder="Buscar por fecha o estado"
-            />
-             <button type="submit">Buscar</button>
-            </form>
+              <form action="" method="get">
+             <%- include('../partials/filtro.ejs') %>
+              </form>
         </section>
-    <!-------------------------lista de turnos------------------------------------>
-    <section class="listaTurnos">
-      <article class="agregarTurnos">
-        <section class="listado"><h1>LISTADO DE TURNOS</h1></section>
-        <section class="agregar">
-          <label for="">AGREGAR</label>
-          <a href="/crearTurno"><iconify-icon icon="bxs:plus-square" style="color: #f33;"></iconify-icon></a>
-        </section>
-      </article>
-      <article class="headerTable">
-        <section>FECHA</section>
-        <section>HORA</section>
-        <section>PACIENTE</section>
-        <section>ESTADO</section>
-        <section></section>
-      </article>
-      
-      <% turnos.forEach(item => { %>
-        <div class="tableAdmin">
-        <article class="row">
-        <section><%= item.Fecha %>         </section>
-        <section><%= item.Hora %>          </section>
-        <section><%= item.PacienteId %>     </section>
-        <section><%= item.EstadoId %>       </section>
-        <article>
-          <a href="/obtenerTurno/<%= item.Id %>"><iconify-icon icon="mdi:pencil" style="color: #1d84b5;"></iconify-icon></a> 
-          <a href="/deleteTurno/<%= item.Id %>"><iconify-icon icon="heroicons-solid:trash" style="color: #f33;"></iconify-icon></a> 
+      <!-------------------------lista de turnos------------------------------------>
+      <section class="listaTurnos">
+        <article class="agregarTurnos">
+          <section class="listado"><h1>LISTADO DE TURNOS</h1></section>
+          <%- include ('../partials/crea.ejs', {ruta: '/crearTurno'})  %>
         </article>
-      </article>
-    </div>
-        <% }); %>
+         <!---------------TABLA------------->
+        <article class="headerTable">
+          <section>FECHA</section>
+          <section>HORA</section>
+          <section>PACIENTE</section>
+          <section>ESTADO</section>
+          <section></section>
+        </article>
+        
+        <% turnos.forEach(item => { %>
+          <div class="tableAdmin">
+            <article class="tableRow">
+              <section><%= item.Fecha.toISOString().split('T')[0] %>    </section>
+              <section><%= item.Hora %>          </section>
+              <section><%= item.PacienteId %>     </section>
+              <section><%= item.EstadoId %>       </section>
+              <article>
+                <a href="/obtenerTurno/<%= item.Id %>"><iconify-icon icon="mdi:pencil" style="color: #1d84b5;"></iconify-icon></a> 
+                <a href="/deleteTurno/<%= item.Id %>"><iconify-icon icon="heroicons-solid:trash" style="color: #f33;"></iconify-icon></a> 
+              </article>
+            </article>
+        </div>
+          <% }); %>
+        
+          <div class="containerPagination">
+            <button class="btnPrev"><<</button>
+            <div id="pagination">   </div>
+            <button class="btnNext">>></button> 
+        </div>
       
-        <div class="containerPagination">
-          <button class="btnPrev"><<</button>
-          <div id="pagination">   </div>
-          <button class="btnNext">>></button> 
-      </div>
-     
-     </section>
+      </section>
     </div>
   
   

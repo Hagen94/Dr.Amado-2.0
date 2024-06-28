@@ -12,29 +12,36 @@
 <main>
 <div class="contenedorModificarTurno">
     <h1>MODIFICAR TURNO</h1>
-    <form action="/updateTurno" method="post">
-    <ul>
-        <li>
-            <label for="fecha">FECHA</label>
-            <input type="date" name="fecha" id="fecha">
-        </li>
-        <li>
-            <label for="hora">HORA</label>
-            <input type="time" name="hora" id="hora">
-        </li>
-        <li>
-            <label for="pacienteId">ID DEL PACIENTE</label>
-            <input type="number" name="pacienteId" id="pacienteId">
-        </li>
-        <li>
-            <label for="estadoId">ID DEL ESTADO</label>
-            <input type="number" name="estadoId" id="estadoId">
-        </li>
-        <!-- Puedes agregar más campos aquí si es necesario -->
-        <li>
-            <button type="submit">MODIFICAR</button>
-        </li>
-    </ul>
+    <form action="/crearTurno" method="post">
+        <ul>
+            <li>
+                <label for="Fecha">FECHA</label>
+                <input type="date" name="Fecha" id="Fecha">
+            </li>
+            <li>
+                <label for="Hora">HORA</label>
+                <input type="time" name="Hora" id="Hora">
+            </li>
+            <li>
+                <label for="PacienteId">ID DEL PACIENTE</label>
+                <input type="number" name="PacienteId" id="PacienteId">
+            </li>
+            <li>
+                <label for="EstadoId">ID DEL ESTADO</label>
+                <input type="number" name="EstadoId" id="EstadoId">
+            </li>
+            <!-- Puedes agregar más campos aquí si es necesario -->
+            <li>
+                <button type="submit">CREAR TURNO</button>
+            </li>
+        </ul>
+    </form>
+    
+    <p class="mensajeInformativo">
+        <%= exito %>
+        
+    </p>
+
 </div>
 </main>
 </body>

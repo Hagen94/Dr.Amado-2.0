@@ -1,0 +1,7 @@
+.agregar{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem ;
+    font-size: 1.5rem;
+    font-weight: bold;
+}

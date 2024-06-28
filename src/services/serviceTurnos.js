@@ -4,7 +4,7 @@ de tu modelo y realicen cualquier lógica de negocio adicional
 
 */
 
-import { deleteTurno, getTurnoById, getTurnos, insertTurno, updateTurno } from "../models/turnosModel.js";
+import { deleteTurno, getTurnoById, getTurnos, insertTurno, updateTurno, verificarTurno } from "../models/turnosModel.js";
 
 
 
@@ -41,6 +41,17 @@ export const crearTurnoService = async (turno) => {
     }
 }
 
+//funcion para verificar si el turno ya existe
+export const verificarTurnoService = async (turno) => {
+    try {
+        //envio la turno a la base de datos apra verificar si el horario esta ocupado
+        const existeTurno = await verificarTurno(turno); 
+        //retornara un true o false, segundo el horario este ocupado o no
+        return existeTurno;
+    } catch (error) {
+        throw error;
+    }
+};
 
 //funcion para borrar un turno
 export const deleteTurnoService = async (id) => {

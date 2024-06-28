@@ -22,13 +22,15 @@
               week: 'Semana',
               day: 'Dia',
               list: 'Lista'},
-              //modal
+              //info del turno
               //salta una descripcion del turno
+              /*
               eventClick: function() {
                 const modal = $('#exampleModal'); 
                 modal.modal("show")
              //  alert('Descripción del turno: ' + info.event.extendedProps.descripcion);
-              },
+              },*/
+              /*para editar desde el calendario
               dateClick: function(fecha) {
                 const modal = $('#exampleModal'); 
                 modal.modal("show")
@@ -40,7 +42,7 @@
             center: 'title', // Título en el centro
             right: 'dayGridMonth,timeGridWeek,timeGridDay', // Botones a la derecha
            
-              },
+              },*/
           })
           calendar.render()
         })
@@ -54,40 +56,12 @@
   <%- include('partials/header') %>
   <h2><center>AGENDA DE TURNOS</center></h2>
   <div class="container col-md-7 ">
- 
       <div id="calendar" style="overflow: auto;"></div>
-
-  
-   
   </div>
   <br>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <label for="fecha">Fecha</label>
-        <input type="date" name="fecha" id="fecha">
-        <label for="hora">Hora</label>
-        <input type="time" name="hora" id="hora">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>

@@ -1,0 +1,35 @@
+
+
+/* styles.css */
+.contenedorFiltro {
+    position: relative;
+}
+
+input[type="text"] {
+    padding: 1rem;
+    font-size: 1em;
+    border: .1rem solid #ccc;
+    border-radius: 0.5rem;
+    width: 20rem;
+    padding-left: 3rem; /* Espacio para el icono */
+}
+
+.admin__icon {
+    position: absolute;
+    left: 1rem; /* Ajusta la posición del icono */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888; /* Color del icono */
+  
+}
+
+.btnBuscarTurno {
+    padding: 1rem;
+    font-size: 1em;
+    border: none;
+    border-radius: 0.5rem;
+    width: 10rem;
+    margin-left: 1rem;
+    background-color: rgb(6, 6, 101);
+    color: white;
+}

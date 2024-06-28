@@ -4,59 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/listapacientes.css">
 </head>
 <body>
   <%- include('../partials/header.ejs') %>
 
     
-    <div class="contenedorpacientes">
-        <section class="buscador">
-            <form action="" method="get">
-            <iconify-icon class="admin__icon" icon="charm:search"></iconify-icon>
-             <input
-             name="filtro"
-             type="text"
-             id="codigoProducto"
-            placeholder="código, nombre o categoria"
-            />
-             <button type="submit">enviar</button>
-            </form>
-        </section>
+  <div class="contenedorPacientes">
+    <section class="buscador">
+         <form action="" method="get">
+        <%- include('../partials/filtro.ejs') %>
+         </form>
+    </section>
     <!-------------------------lista de pacientes------------------------------------>
     <section class="listaPacientes">
-      <article class="agregarProductos">
-        <section class="listado"><h1>LISTADO DE PRODUCTOS</h1></section>
-        <section class="agregar">
-          <label for="">AGREGAR</label>
-          <a href="/crearPaciente"><iconify-icon icon="bxs:plus-square" style="color: #f33;"></iconify-icon></a>
+      <article class="agregarPacientes">
+        <section class="listado">
+          <h1>LISTADO DE PRODUCTOS</h1>
         </section>
+        <%- include ('../partials/crea.ejs', {ruta: '/crearPaciente'})  %>
       </article>
+      <!---------------TABLA------------->
       <article class="headerTable">
         <section>NOMBRE</section>
         <section>DNI</section>
         <section>OBRA SOCIAL</section>
         <section>NUMERO DE ASOCIADO</section>
         <section>DIRECCION</section>
-        <section>DIRECCION</section>
+        <section>TELEFONO</section>
         <section></section>
       </article>
       
       <% pacientes.forEach(item => { %>
-        <div class="tableAdmin">
-        <article class="row">
-        <section><%= item.Nombre %>         </section>
-        <section><%= item.DNI %>            </section>
-        <section><%= item.ObraSocialId %>   </section>
-        <section><%= item.NumeroAsociado %> </section>
-        <section><%= item.Direccion %>      </section>
-        <section><%= item.Telefono %>       </section>
-        <article>
-          <a href="/editarPaciente/<%= item.Id %>"><iconify-icon icon="mdi:pencil" style="color: #1d84b5;"></iconify-icon></a> 
-          <a href="/deletePaciente/<%= item.Id %>"><iconify-icon icon="heroicons-solid:trash" style="color: #f33;"></iconify-icon></a> 
-        </article>
-      </article>
-    </div>
+        
+          <article class="tableRow">
+            <section><%= item.Nombre %>         </section>
+            <section><%= item.DNI %>            </section>
+            <section><%= item.ObraSocialId %>   </section>
+            <section><%= item.NumeroAsociado %> </section>
+            <section><%= item.Direccion %>      </section>
+            <section><%= item.Telefono %>       </section>
+            <article>
+              <a href="/editarPaciente/<%= item.Id %>"><iconify-icon icon="mdi:pencil" style="color: #1d84b5;"></iconify-icon></a> 
+              <a href="/deletePaciente/<%= item.Id %>"><iconify-icon icon="heroicons-solid:trash" style="color: #f33;"></iconify-icon></a> 
+            </article>
+          </article>
+        
         <% }); %>
       
         <div class="containerPagination">
@@ -65,8 +60,8 @@
           <button class="btnNext">>></button> 
       </div>
      
-     </section>
-    </div>
+    </section>
+  </div>
   
   
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
