@@ -125,3 +125,17 @@ export const verificarTurno = (turno) => {
       );
     });
   }
+
+  //traigo el estado de los turnos
+
+  export const getEstadoTurnos = () => {
+    return new Promise((resolve, reject) => {
+      pool.query('SELECT * FROM estadoturno', (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  };

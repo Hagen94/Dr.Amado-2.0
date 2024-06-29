@@ -4,7 +4,7 @@ controla la respuesta de las rutas
 // controller.js
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { crearPacienteService, deletePacienteService, getAllPacientes, getPacienteByIdService, updatePacienteService } from '../services/servicePacientes.js';
+import { crearPacienteService, deletePacienteService, filtrarPacientesPorTodosServices, getAllPacientes, getObraSocialService, getPacienteByIdService, updatePacienteService } from '../services/servicePacientes.js';
 
 import { getTurnoByPacienteIdService } from '../services/serviceTurnos.js';
 
@@ -14,10 +14,18 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 traigo los usuarios y los muestro en el home
 */ 
 export const pacientes = async (req, res) => {
-    //traigo todos los pacientes
+    const filter = req.query.filtro
+    if(filter){
+        const pacientes = await filtrarPacientesPorTodosServices(filter);
+        const obraSociales = await getObraSocialService();
+        res.render(path.resolve(__dirname, '../../view/pacientes/pacientes.ejs'), {"pacientes":pacientes, "obraSociales":obraSociales});
+    }else{//traigo todos los pacientes
     const pacientes = await getAllPacientes();
-    console.log(pacientes)
-    res.render(path.resolve(__dirname, '../../view/pacientes/pacientes.ejs'), {"pacientes":pacientes});
+    const obraSociales = await getObraSocialService();
+    res.render(path.resolve(__dirname, '../../view/pacientes/pacientes.ejs'), {"pacientes":pacientes, "obraSociales":obraSociales});
+
+    }
+    
    
 }
 //crear paciente
@@ -37,7 +45,6 @@ export const deletePacienteController = async (req, res) => {
     const pacienteId = req.params.id;
     // Consulta si hay turnos asociados al pacienteId
     const turnosAsociados = await getTurnoByPacienteIdService(pacienteId);
-        console.log("turnosAsociados: ", turnosAsociados)
     if (turnosAsociados.length > 0) {
         // Hay turnos asociados, muestra un mensaje o redirige con un error
         res.status(400).send('No se puede eliminar el paciente debido a turnos asociados.');
@@ -70,4 +77,6 @@ export const updatePacienteController = async (req, res) => {
     const pacienteActualizado = await updatePacienteService(req.params.id, req.body);
     res.redirect('/pacientes')
 }
+
+
 

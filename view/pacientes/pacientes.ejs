@@ -42,14 +42,17 @@
           <article class="tableRow">
             <section><%= item.Nombre %>         </section>
             <section><%= item.DNI %>            </section>
-            <section><%= item.ObraSocialId %>   </section>
+            <section>
+              <% const obraSocial = obraSociales.find(os => os.Id === item.ObraSocialId); %>
+              <%= obraSocial ? obraSocial.Nombre : 'Desconocida' %>
+            </section>
             <section><%= item.NumeroAsociado %> </section>
             <section><%= item.Direccion %>      </section>
             <section><%= item.Telefono %>       </section>
-            <article>
+            <article class="botones">
               <a href="/pacientes/editarPaciente/<%= item.Id %>"><iconify-icon icon="mdi:pencil" style="color: #1d84b5;"></iconify-icon></a> 
               <form action="/pacientes/deletePaciente/<%= item.Id %>?_method=DELETE" method="post">
-                <button type="submit">
+                <button type="submit" class="delete">
                     <iconify-icon icon="heroicons-solid:trash" style="color: #f33;"></iconify-icon>
                 </button>
             </form>

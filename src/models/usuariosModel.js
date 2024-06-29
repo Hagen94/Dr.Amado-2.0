@@ -79,3 +79,33 @@ export const getUsers = () => {
       );
     });
   }
+
+  //traigo todos los estados
+
+  export const getEstadosUsuarios = () => {
+    return new Promise((resolve, reject) => {
+      pool.query('SELECT * FROM estadousuario', 
+        (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
+
+  //traigo todos los estados perfil 
+
+  export const getPerfiles = () => {
+    return new Promise((resolve, reject) => {
+      pool.query('SELECT * FROM perfil',
+         (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }

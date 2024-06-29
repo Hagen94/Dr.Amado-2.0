@@ -21,3 +21,14 @@ main{
     align-items: center;
     justify-content: center;
 }
+
+.botones{
+    display: flex;
+    flex-direction: row;
+}
+.delete{
+   border: none;
+   background-color: transparent;
+   font-size: 1.5rem;
+
+}

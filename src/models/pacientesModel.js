@@ -76,25 +76,41 @@ export const insertPaciente = (paciente) => {
     });
   };
 
-  /*
-  export const deletePacienteController = async (req, res) => {
-    const pacienteId = req.params.id;
+//funcion para traer las obras sociales de la base de datos
+export const getObraSocial = () => {
+    return new Promise((resolve, reject) => {
+      pool.query('SELECT * FROM obrasocial', (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  };
 
-    // Consulta si hay turnos asociados al paciente
-    const turnosAsociados = await consultarTurnosAsociados(pacienteId);
-
-    if (turnosAsociados.length > 0) {
-        // Hay turnos asociados, muestra un mensaje de error
-        res.status(400).send('No se puede eliminar el paciente debido a turnos asociados.');
-    } else {
-        // No hay turnos asociados, procede con la eliminación
-        await eliminarPaciente(pacienteId);
-        res.send('Paciente eliminado correctamente.');
-    }
+  //funcion para filtrar los pacientes de la base de datos
+  export const filtrarPacientesPorTodos = (columnaFiltro) => {
+    return new Promise((resolve, reject) => {
+        pool.query(`
+            SELECT *
+            FROM Paciente
+            WHERE Nombre LIKE ? OR
+                  DNI LIKE ? OR
+                  ObraSocialId LIKE ? OR
+                  NumeroAsociado LIKE ? OR
+                  Direccion LIKE ? OR
+                  Telefono LIKE ?
+        `, [`%${columnaFiltro}%`, `%${columnaFiltro}%`, `%${columnaFiltro}%`, `%${columnaFiltro}%`, `%${columnaFiltro}%`, `%${columnaFiltro}%`], (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
+    });
 };
 
   
   
   
-  
-  */

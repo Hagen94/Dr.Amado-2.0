@@ -16,12 +16,12 @@
     <ul>
         <li>
             <label for="Fecha">FECHA</label>
-            <input type="date" name="Fecha" id="Fecha" value="<%= turno.Fecha.toISOString().split('T')[0] %>" />
+            <input type="date" name="Fecha" id="Fecha" value="<%= turno.Fecha.toISOString().split('T')[0] %>" required/>
         </li>
         
         <li>
             <label for="Hora">HORA</label>
-            <input type="time" name="Hora" id="Hora" value="<%= turno.Hora %>">
+            <input type="time" name="Hora" id="Hora" value="<%= turno.Hora %>" required/>
         </li>
         <label for="PacienteId">SELECCIONE UN PACIENTE:</label>
         <select id="PacienteId" name="PacienteId">
@@ -32,8 +32,13 @@
         
         <li>
             <label for="EstadoId">ID DEL ESTADO</label>
-            <input type="number" name="EstadoId" id="EstadoId" value="<%= turno.EstadoId %>">
+            <select id="EstadoId" name="EstadoId">
+                <% estados.forEach(estado => { %>
+                    <option value="<%= estado.id %>" <%= estado.id === turno.EstadoId ? 'selected' : '' %>><%= estado.estado %></option>
+                <% }); %>
+            </select>
         </li>
+        
        
         <li>
             <button type="submit">GUARDAR CAMBIOS</button>

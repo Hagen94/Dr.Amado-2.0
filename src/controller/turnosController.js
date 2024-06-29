@@ -4,7 +4,7 @@ controla la respuesta de las rutas
 // controller.js
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { crearTurnoService, deleteTurnoService, getAllTurnos, getTurnoByIdService, updateTurnoService, verificarTurnoService } from '../services/serviceTurnos.js';
+import { crearTurnoService, deleteTurnoService, getAllTurnos, getEstadoTurnoService, getTurnoByIdService, updateTurnoService, verificarTurnoService } from '../services/serviceTurnos.js';
 import { getAllPacientes } from '../services/servicePacientes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -48,7 +48,9 @@ export const getTurnosController = async (req, res) => {
         const turnos = await getAllTurnos();
         //traigo todos los pacientes
         const pacientes = await getAllPacientes();
-        res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos":turnos,"pacientes":pacientes});
+        //traigo los estados del turno 
+        const estados = await getEstadoTurnoService();
+        res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos":turnos,"pacientes":pacientes, "estados":estados});
         
     } catch (error) {
         res.status(500).send(error)
@@ -66,7 +68,7 @@ export const mostrarFormularioCrearTurno = async (req, res) => {
 export const crearTurnoController = async (req, res) => {
     try {
         //traigo los pacientes para que se seleccion uno al crear un turno
-    const pacientes = await getAllPacientes();
+        const pacientes = await getAllPacientes();
         const nuevoTurno = req.body; // Guardo el turno en nuevoTurno
         // Si el turno existe no esta dsponible
         const turnoExiste = await verificarTurnoService(nuevoTurno);
@@ -81,7 +83,7 @@ export const crearTurnoController = async (req, res) => {
             ExitoOFracaso =  'El turno está ocupado. Elige otro horario.' 
             res.render(path.resolve(__dirname, '../../view/turnos/crearTurnos.ejs'), { exito: ExitoOFracaso, "pacientes":pacientes });
         }
-       
+      
 
     } catch (error) {
         console.error('Error al crear el turno:', error);
@@ -92,26 +94,30 @@ export const crearTurnoController = async (req, res) => {
 //eliminar turno
 export const deleteTurnoController = async (req, res) => {
     //envio el id del turno.
-    const turnoBorrado = await deleteTurnoService(req.params.id);
-    res.redirect('/listarTurnos')
+    console.log("El turno a eliminar es: ",req.params.id)
+     await deleteTurnoService(req.params.id);
+    res.redirect('/listaTurnos')
+    
 }
 
  // voy a la ruta de editar 
 export const mostrarFormularioEditarTurno = async (req, res) => {
        //traigo los pacientes para que se seleccion uno al crear un turno
        const pacientes = await getAllPacientes();
+       //traigo los estados del turno 
+       const estados = await getEstadoTurnoService();
     //envio el id del turno para buscar el item en la base y mostrarlo en el 
     //me quedo con el id
     const id = req.params.id;
     
     const turno = await getTurnoByIdService(id);
 
-   res.render(path.resolve(__dirname, '../../view/turnos/editarTurnos.ejs'), {"turno":turno, "pacientes":pacientes});
+   res.render(path.resolve(__dirname, '../../view/turnos/editarTurnos.ejs'), {"turno":turno, "pacientes":pacientes, "estados":estados});
 }
 //actualizar turno
 export const updateTurnoController = async (req, res) => {
     //envio el id del turno para buscar el item en la base y lo actualizarlo.
     const turnoActualizado = await updateTurnoService(req.params.id, req.body);
-    res.redirect('/listarTurnos')
+    res.redirect('/listaTurnos')
     
 }

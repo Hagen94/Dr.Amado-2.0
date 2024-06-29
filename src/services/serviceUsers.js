@@ -5,7 +5,7 @@ de tu modelo y realicen cualquier lógica de negocio adicional
 */
 
 // service.js
-import {deleteUser, getUsers, getUsersById, insertUser, updateUser} from '../models/usuariosModel.js'
+import {deleteUser, getEstadosUsuarios, getPerfiles, getUsers, getUsersById, insertUser, updateUser} from '../models/usuariosModel.js'
 
 export const getAllUsers = async () => {
   try {
@@ -54,4 +54,26 @@ export const updateUsuarioService = async (id, user) => {
   } catch (error) { 
       throw error;
   } 
+}
+
+//obtengo todos los estados de usuarios 
+
+export const getEstadosTurnosService = async () => {
+  try {
+      const estados = await getEstadosUsuarios();
+      return estados;
+  } catch (error) {
+      throw error;
+  }
+}
+
+//obtengo todos los perfiles de usuarios 
+
+export const getPerfilesService = async () => {
+  try {
+      const perfiles = await getPerfiles();
+      return perfiles;
+  } catch (error) {
+      throw error;
+  }
 }

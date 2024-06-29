@@ -7,7 +7,7 @@
     gap: 0.2rem;
 }
 .listaPacientes{
-    width: 70%;
+    width: 80%;
 }
 .buscador{
     margin-top: 1rem;
@@ -26,7 +26,7 @@
 
 .headerTable, .tableRow{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 2%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 5%;
     grid-template-rows: auto;
     gap: 0.2rem;
     font-size: 1.5em;

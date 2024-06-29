@@ -16,11 +16,11 @@
         <ul>
             <li>
                 <label for="Fecha">FECHA</label>
-                <input type="date" name="Fecha" id="Fecha">
+                <input type="date" name="Fecha" id="Fecha" required>
             </li>
             <li>
                 <label for="Hora">HORA</label>
-                <input type="time" name="Hora" id="Hora">
+                <input type="time" name="Hora" id="Hora"   required>
             </li>
         
             <li>
@@ -30,12 +30,11 @@
                         <option value="<%= paciente.Id %>"><%= paciente.Nombre %></option>
                     <% }); %>
                 </select>
-            </li>
+    
             <li>
-                <label for="EstadoId">Selecciona un estado:</label>
+                 <label for="EstadoId">Selecciona un estado:</label>
                 <select id="EstadoId" name="EstadoId">
-                    <option value="0">SELECCIONES</option>
-                    <option value="1">OCUPADO</option>
+                    <option value="1" s>OCUPADO</option>
                     <option value="2">LIBRE</option>
                 </select>
              </li>   

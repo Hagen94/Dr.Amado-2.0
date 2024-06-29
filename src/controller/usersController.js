@@ -5,7 +5,7 @@ controla la respuesta de las rutas
 // controller.js
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { crearUsuarioService, deleteUsuarioService, getAllUsers, getUsuarioService, updateUsuarioService } from '../services/serviceUsers.js';
+import { crearUsuarioService, deleteUsuarioService, getAllUsers, getEstadosTurnosService, getPerfilesService, getUsuarioService, updateUsuarioService } from '../services/serviceUsers.js';
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -15,7 +15,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export const getUsuariosController = async (req, res) => {
   //traigo todos los usuarios
   const usuarios = await getAllUsers();
- res.render(path.resolve(__dirname, '../../view/usuarios/usuarios.ejs'), {usuarios});
+  //traigo los perfiles de usuaros y los estados
+  const estados = await getEstadosTurnosService();
+  const perfiles = await getPerfilesService();
+ res.render(path.resolve(__dirname, '../../view/usuarios/usuarios.ejs'), {usuarios, estados, perfiles});
 }
 
 // voy a la ruta de crear usuario
@@ -53,3 +56,6 @@ export const updateUsuarioController = async (req, res) => {
     const userActualizado = await updateUsuarioService(req.params.id, req.body);
     res.redirect('/usuarios')
 }
+
+//se traen todos los estados del turno
+

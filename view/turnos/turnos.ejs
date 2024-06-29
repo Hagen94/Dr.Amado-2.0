@@ -37,12 +37,18 @@
             <article class="tableRow">
               <section><%= item.Fecha.toISOString().split('T')[0] %>    </section>
               <section><%= item.Hora %>          </section>
-              <section><%= item.PacienteId %>     </section>
-              <section><%= item.EstadoId %>       </section>
-              <article>
+              <section>
+                <% const paciente = pacientes.find(p => p.Id === item.PacienteId); %>
+                <%= paciente ? paciente.Nombre : 'Desconocida' %>
+              </section>
+              <section>
+                <% const estado = estados.find(e => e.id === item.EstadoId); %>
+                <%= estado ? estado.estado : 'Desconocida' %>
+              </section>
+              <article class="botones">
                 <a href="/listaTurnos/obtenerTurno/<%= item.Id %>"><iconify-icon icon="mdi:pencil" style="color: #1d84b5;"></iconify-icon></a> 
                 <form action="/listaTurnos/deleteTurno/<%= item.Id %>?_method=DELETE" method="post">
-                  <button type="submit">
+                  <button type="submit" class="delete">
                       <iconify-icon icon="heroicons-solid:trash" style="color: #f33;"></iconify-icon>
                   </button>
               </form>

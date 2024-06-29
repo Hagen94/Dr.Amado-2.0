@@ -2,7 +2,7 @@
 funciones que llamen a las funciones 
 de tu modelo y realicen cualquier lógica de negocio adicional
 */
-import  {deletePaciente, getPacientebyId, getPacientes, insertPaciente, updatePaciente} from '../models/pacientesModel.js'
+import  {deletePaciente, filtrarPacientesPorTodos, getObraSocial, getPacientebyId, getPacientes, insertPaciente, updatePaciente} from '../models/pacientesModel.js'
 export const getAllPacientes = async () => {
     try {
         const pacientes = await getPacientes();
@@ -47,5 +47,27 @@ export const updatePacienteService = async (id, paciente) => {
         return pacienteActualizado;
     } catch (error) {
         throw error;
+    }
+}
+
+//traigo las obras sociales
+
+export const getObraSocialService = async () => {
+try {
+    const obrasSociales = await getObraSocial();
+    return obrasSociales;
+} catch (error) {
+    throw error;
+}
+
+}
+
+//funcion para filtrar los pacientes de la base de datos
+export const filtrarPacientesPorTodosServices = async (columnaFiltro) => {
+    try {
+        const pacientes = await filtrarPacientesPorTodos(columnaFiltro);
+        return pacientes;
+    } catch (error) {
+        
     }
 }

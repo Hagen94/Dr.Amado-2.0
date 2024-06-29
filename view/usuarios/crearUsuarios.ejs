@@ -11,30 +11,29 @@
     <%- include('../partials/header.ejs') %>
 <main>
 <div class="contenedorEditarUsuario">
-    <h1>EDITAR USUARIO</h1>
+    <h1>CREAR USUARIO</h1>
     <form action="/usuarios/crearUsuario" method="post">
     <ul>
         <li>
             <label for="Nombre">NOMBRE</label>
-            <input type="text" name="Nombre" id="Nombre">
+            <input type="text" name="Nombre" id="Nombre"  required min="5" max="20">
         </li>
         <li>
             <label for="Clave">CLAVE</label>
-            <input type="password" name="Clave" id="Clave">
+            <input type="password" name="Clave" id="Clave" required min="5" max="20">
         </li>
         <li>
             <label for="EstadoId">SELECCIONE UN ESTADO:</label>
             <select id="EstadoId" name="EstadoId">
-                <option value="0">SELECCIONE</option>
-                <option value="1">ACTIVO</option>
+               
+                <option value="1" selected>ACTIVO</option>
                 <option value="2">INACTIVO</option>
             </select>
         </li>
 
-        <li>
-            <select name="PerfilId" id="PerfilId">
-                <option value="0">SELECCIONE</option>
-                <option value="1">ADMIN</option>
+        <li> <label for="PerfilId">SELECCIONE UN PERFIL:</label>
+            <select name="PerfilId" id="PerfilId"> 
+                <option value="1" selected>ADMIN</option>
                 <option value="2">OBRA SOCIAL</option>
             </select>
         </li>
