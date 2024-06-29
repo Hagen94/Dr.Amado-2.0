@@ -12,25 +12,34 @@
 <main>
 <div class="contenedorEditarUsuario">
     <h1>EDITAR USUARIO</h1>
-    <form action="/crearUsuario" method="post">
+    <form action="/usuarios/crearUsuario" method="post">
     <ul>
         <li>
-            <label for="nombre">NOMBRE</label>
-            <input type="text" name="nombre" id="nombre">
+            <label for="Nombre">NOMBRE</label>
+            <input type="text" name="Nombre" id="Nombre">
         </li>
         <li>
-            <label for="clave">CLAVE</label>
-            <input type="password" name="clave" id="clave">
+            <label for="Clave">CLAVE</label>
+            <input type="password" name="Clave" id="Clave">
         </li>
         <li>
-            <label for="estadoId">ID DEL ESTADO</label>
-            <input type="number" name="estadoId" id="estadoId">
+            <label for="EstadoId">SELECCIONE UN ESTADO:</label>
+            <select id="EstadoId" name="EstadoId">
+                <option value="0">SELECCIONE</option>
+                <option value="1">ACTIVO</option>
+                <option value="2">INACTIVO</option>
+            </select>
         </li>
+
         <li>
-            <label for="perfilId">ID DEL PERFIL</label>
-            <input type="number" name="perfilId" id="perfilId">
+            <select name="PerfilId" id="PerfilId">
+                <option value="0">SELECCIONE</option>
+                <option value="1">ADMIN</option>
+                <option value="2">OBRA SOCIAL</option>
+            </select>
         </li>
-        <!-- Puedes agregar más campos aquí si es necesario -->
+        
+    
         <li>
             <button type="submit">GUARDAR CAMBIOS</button>
         </li>

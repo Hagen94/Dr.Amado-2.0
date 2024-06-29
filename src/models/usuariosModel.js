@@ -34,7 +34,7 @@ export const getUsers = () => {
   export const deleteUser = (id) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        'DELETE FROM usuario WHERE id = ?',
+        'DELETE FROM usuario WHERE Id = ?',
         [id],
         (error, results) => {
           if (error) {
@@ -50,7 +50,7 @@ export const getUsers = () => {
   export const getUsersById = (id) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        'SELECT * FROM usuario WHERE id = ?',
+        'SELECT * FROM usuario WHERE Id = ?',
         [id],
         (error, results) => {
           if (error) {
@@ -67,7 +67,7 @@ export const getUsers = () => {
   export const updateUser = (id, user) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        'UPDATE usuario SET ? WHERE id = ?',
+        'UPDATE usuario SET ? WHERE Id = ?',
         [user, id],
         (error, results) => {
           if (error) {

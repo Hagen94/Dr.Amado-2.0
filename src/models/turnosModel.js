@@ -21,12 +21,28 @@ export const getTurnos = () => {
   export const getTurnoById = (id) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        'SELECT * FROM turnos WHERE id = ?',[id],
+        'SELECT * FROM turnos WHERE Id = ?',[id],
         (error, results) => {
           if (error) {
             reject(error);
           } else {
             resolve(results[0]);
+          }
+        }
+      );
+    });
+  };
+
+  //traer turno segun idpaciente
+  export const getTurnoByPacienteId = (id) => {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        'SELECT * FROM turnos WHERE PacienteId = ?',[id],
+        (error, results) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results);
           }
         }
       );
@@ -82,7 +98,7 @@ export const verificarTurno = (turno) => {
   export const deleteTurno = (id) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        'DELETE FROM turnos WHERE id = ?',[id],
+        'DELETE FROM turnos WHERE Id = ?',[id],
         (error, results) => {
           if (error) {
             reject(error);
@@ -98,7 +114,7 @@ export const verificarTurno = (turno) => {
   export const updateTurno = (id, turno) => {
     return new Promise((resolve, reject) => {
       pool.query(
-        'UPDATE turnos SET ? WHERE id = ?',[turno, id],
+        'UPDATE turnos SET ? WHERE Id = ?',[turno, id],
         (error, results) => {
           if (error) {
             reject(error);

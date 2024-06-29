@@ -27,6 +27,7 @@ export const mostrarFormularioCrearUsuario = (req, res) => {
 export const createUser =async (req, res) => {
     try {
         const user = await crearUsuarioService(req.body); //envio la respuesta al servicio
+        res.redirect('/usuarios')
       } catch (error) {
         res.status(500).json({ error: error.message });
       }
@@ -36,6 +37,7 @@ export const createUser =async (req, res) => {
 export const deleteUsuarioController = async (req, res) => {
     //envio el id del usuario.
     const userBorrado = await deleteUsuarioService(req.params.id);
+    res.redirect('/usuarios')
 }
 
 //voy a la ruta de editar
@@ -49,5 +51,5 @@ export const mostrarFormularioEditarUsuario =async (req, res) => {
 export const updateUsuarioController = async (req, res) => {
     //envio el id del usuario.
     const userActualizado = await updateUsuarioService(req.params.id, req.body);
-    
+    res.redirect('/usuarios')
 }

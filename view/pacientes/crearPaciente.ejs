@@ -12,31 +12,38 @@
 <main>
 <div class="contenedorCrearPaciente">
     <h1>CREAR PACIENTE</h1>
-    <form action="/createPaciente" method="post">
+    <form action="/pacientes/crearPaciente" method="post">
     <ul>
         <li>
-            <label for="nombre">NOMBRE</label>
-            <input type="text" name="nombre" id="nombre">
+            <label for="Nombre">NOMBRE</label>
+            <input type="text" name="Nombre" id="Nombre">
         </li>
         <li>
-            <label for="dni">DNI</label>
-            <input type="text" name="dni" id="dni">
+            <label for="DNI">DNI</label>
+            <input type="text" name="DNI" id="DNI">
         </li>
         <li>
-            <label for="obraSocial">OBRA SOCIAL</label>
-            <input type="text" name="obraSocial" id="obraSocial">
+            <label for="ObraSocialId">Selecciona una obra social:</label>
+            <select id="ObraSocialId" name="ObraSocialId">
+                <option value="0">SELECCIONE</option>
+                <option value="1">OSDE</option>
+                <option value="2">IOMA</option>
+                <option value="3">OSCEP</option>
+                <option value="4">NO TIENE</option>
+            </select>
+
         </li>
         <li>
-            <label for="numeroAsociado">NUMERO ASOCIADO</label>
-            <input type="number" name="numeroAsociado" id="numeroAsociado">
+            <label for="NumeroAsociado">NUMERO ASOCIADO</label>
+            <input type="number" name="NumeroAsociado" id="NumeroAsociado">
         </li>
         <li>
-            <label for="direccion">DIRECCION</label>
-            <input type="text" name="direccion" id="direccion">
+            <label for="Direccion">DIRECCION</label>
+            <input type="text" name="Direccion" id="Direccion">
         </li>
         <li>
-            <label for="telefono">TELEFONO</label>
-            <input type="text" name="telefono" id="telefono">
+            <label for="Telefono">TELEFONO</label>
+            <input type="text" name="Telefono" id="Telefono">
         </li>
         <li>
             <button type="submit">CREAR</button>

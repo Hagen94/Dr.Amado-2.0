@@ -12,33 +12,36 @@
 <main>
 <div class="contenedorEditarPaciente">
     <h1>EDITAR PACIENTE</h1>
-    <form action="/updatePaciente" method="post">
+    <form action="/pacientes/editarPaciente/<%= paciente.Id %>?_method=PUT" method="post">
     <ul>
         <li>
-            <label for="nombre">NOMBRE</label>
-            <input type="text" name="nombre" id="nombre" value="<%= paciente.Nombre %>">
+            <label for="Nombre">NOMBRE</label>
+            <input type="text" name="Nombre" id="Nombre" value="<%= paciente.Nombre %>">
         </li>
         <li>
-            <label for="dni">DNI</label>
-            <input type="text" name="dni" id="dni" value="<%= paciente.DNI %>">
+            <label for="DNI">DNI</label>
+            <input type="text" name="DNI" id="DNI" value="<%= paciente.DNI %>">
+        </li>
+                <label for="ObraSocialId">Selecciona una obra social:</label>
+                <select id="ObraSocialId" name="ObraSocialId">
+                    <option value="0">SELECCIONE</option>
+                    <option value="1" <%= paciente.ObraSocialId === 1 ? 'selected' : '' %>>OSDE</option>
+                    <option value="2" <%= paciente.ObraSocialId === 2 ? 'selected' : '' %>>IOMA</option>
+                    <option value="3" <%= paciente.ObraSocialId === 3 ? 'selected' : '' %>>OSCEP</option>
+                    <option value="4" <%= paciente.ObraSocialId === 4 ? 'selected' : '' %>>NO TIENE</option>
+                </select>
+        <li>
+            <label for="NumeroAsociado">NUMERO ASOCIADO</label>
+            <input type="text" name="NumeroAsociado" id="NumeroAsociado" value="<%= paciente.NumeroAsociado %>">
         </li>
         <li>
-            <label for="obraSocialId">ID DE OBRA SOCIAL</label>
-            <input type="number" name="obraSocialId" id="obraSocialId" value="<%= paciente.ObraSocialId %>">
+            <label for="Direccion">DIRECCION</label>
+            <input type="text" name="Direccion" id="Direccion" value="<%= paciente.Direccion %>">
         </li>
         <li>
-            <label for="numeroAsociado">NUMERO ASOCIADO</label>
-            <input type="text" name="numeroAsociado" id="numeroAsociado" value="<%= paciente.NumeroAsociado %>">
+            <label for="Telefono">TELEFONO</label>
+            <input type="text" name="Telefono" id="Telefono" value="<%= paciente.Telefono %>">
         </li>
-        <li>
-            <label for="direccion">DIRECCION</label>
-            <input type="text" name="direccion" id="direccion" value="<%= paciente.Direccion %>">
-        </li>
-        <li>
-            <label for="telefono">TELEFONO</label>
-            <input type="text" name="telefono" id="telefono" value="<%= paciente.Telefono %>">
-        </li>
-        <!-- Puedes agregar más campos aquí si es necesario -->
         <li>
             <button type="submit">GUARDAR CAMBIOS</button>
         </li>

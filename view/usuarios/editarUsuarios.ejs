@@ -12,25 +12,33 @@
 <main>
 <div class="contenedorEditarUsuario">
     <h1>EDITAR USUARIO</h1>
-    <form action="" method="post">
+    <form action="/usuarios/editarUsuario/<%=usuario.Id%>?_method=PUT" method="post">
     <ul>
         <li>
-            <label for="nombre">NOMBRE</label>
-            <input type="text" name="nombre" id="nombre" value="<%= usuario.Nombre %>">
+            <label for="Nombre">NOMBRE</label>
+            <input type="text" name="Nombre" id="Nombre" value="<%= usuario.Nombre %>">
         </li>
         <li>
-            <label for="clave">CLAVE</label>
-            <input type="password" name="clave" id="clave" value="<%= usuario.Clave %>">
+            <label for="Clave">CLAVE</label>
+            <input type="password" name="Clave" id="Clave" value="<%= usuario.Clave %>">
         </li>
         <li>
-            <label for="estadoId">ID DEL ESTADO</label>
-            <input type="number" name="estadoId" id="estadoId" value="<%= usuario.EstadoId %>">
+            <label for="EstadoId">SELECCIONE UN ESTADO:</label>
+            <select id="EstadoId" name="EstadoId">
+                <option value="0" <%= usuario.EstadoId === 0 ? 'selected' : '' %>>SELECCIONE</option>
+                <option value="1" <%= usuario.EstadoId === 1 ? 'selected' : '' %>>ACTIVO</option>
+                <option value="2" <%= usuario.EstadoId === 2 ? 'selected' : '' %>>INACTIVO</option>
+            </select>
         </li>
+        
         <li>
-            <label for="perfilId">ID DEL PERFIL</label>
-            <input type="number" name="perfilId" id="perfilId" value="<%= usuario.PerfilId %>">
+            <label for="PerfilId">SELECCIONE UN PERFIL:</label>
+            <select id="PerfilId" name="PerfilId">
+                <option value="0" <%= usuario.PerfilId === 0 ? 'selected' : '' %>>SELECCIONE</option>
+                <option value="1" <%= usuario.PerfilId === 1 ? 'selected' : '' %>>ADMIN</option>
+                <option value="2" <%= usuario.PerfilId === 2 ? 'selected' : '' %>>OBRA SOCIAL</option>
+            </select>
         </li>
-        <!-- Puedes agregar más campos aquí si es necesario -->
         <li>
             <button type="submit">GUARDAR CAMBIOS</button>
         </li>

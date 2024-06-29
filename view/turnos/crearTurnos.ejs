@@ -11,8 +11,8 @@
     <%- include('../partials/header.ejs') %>
 <main>
 <div class="contenedorModificarTurno">
-    <h1>MODIFICAR TURNO</h1>
-    <form action="/crearTurno" method="post">
+    <h1>CREAR TURNO</h1>
+    <form action="/listaTurnos/crearTurno" method="post">
         <ul>
             <li>
                 <label for="Fecha">FECHA</label>
@@ -22,15 +22,24 @@
                 <label for="Hora">HORA</label>
                 <input type="time" name="Hora" id="Hora">
             </li>
+        
             <li>
-                <label for="PacienteId">ID DEL PACIENTE</label>
-                <input type="number" name="PacienteId" id="PacienteId">
+                <label for="PacienteId">Selecciona un paciente:</label>
+                <select id="PacienteId" name="PacienteId">
+                    <% pacientes.forEach(paciente => { %>
+                        <option value="<%= paciente.Id %>"><%= paciente.Nombre %></option>
+                    <% }); %>
+                </select>
             </li>
             <li>
-                <label for="EstadoId">ID DEL ESTADO</label>
-                <input type="number" name="EstadoId" id="EstadoId">
-            </li>
-            <!-- Puedes agregar más campos aquí si es necesario -->
+                <label for="EstadoId">Selecciona un estado:</label>
+                <select id="EstadoId" name="EstadoId">
+                    <option value="0">SELECCIONES</option>
+                    <option value="1">OCUPADO</option>
+                    <option value="2">LIBRE</option>
+                </select>
+             </li>   
+
             <li>
                 <button type="submit">CREAR TURNO</button>
             </li>

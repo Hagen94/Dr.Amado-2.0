@@ -1,8 +1,11 @@
 import express from 'express';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-//importo mainRoutes donde estan las rutas
+//importo archivos donde estan las rutas
 import mainRoutes from './src/routes/mainRoutes.js';
+import routerPacientes from './src/routes/pacientesRoutes.js';
+import routerTurnos from './src/routes/turnosRoutes.js';
+import routerUuarios from './src/routes/usuariosRoutes.js';
 //importo dotenv para usar variables de entorno
 import { config } from 'dotenv';
 config();
@@ -12,7 +15,6 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
 
 /**
  * formateo para usar ejs
@@ -33,6 +35,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //agrego method override para metodos no soportados como put o delete
 app.use(methodOverride('_method'));
 app.use('/', mainRoutes);
+app.use('/pacientes', routerPacientes);
+app.use('/listaTurnos', routerTurnos);
+app.use('/usuarios', routerUuarios);
 
 
 /*-----Errores 404----- */

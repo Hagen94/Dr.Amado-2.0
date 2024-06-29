@@ -12,25 +12,29 @@
 <main>
 <div class="contenedorEditarTurno">
     <h1>EDITAR TURNO</h1>
-    <form action="/updateTurno" method="post">
+    <form action="/listaTurnos/editarTurno/<%=turno.Id%>?_method=PUT" method="post">
     <ul>
         <li>
-            <label for="fecha">FECHA</label>
-            <input type="date" name="fecha" id="fecha" value="<%= turno.Fecha %>">
+            <label for="Fecha">FECHA</label>
+            <input type="date" name="Fecha" id="Fecha" value="<%= turno.Fecha.toISOString().split('T')[0] %>" />
         </li>
+        
         <li>
-            <label for="hora">HORA</label>
-            <input type="time" name="hora" id="hora" value="<%= turno.Hora %>">
+            <label for="Hora">HORA</label>
+            <input type="time" name="Hora" id="Hora" value="<%= turno.Hora %>">
         </li>
+        <label for="PacienteId">SELECCIONE UN PACIENTE:</label>
+        <select id="PacienteId" name="PacienteId">
+            <% pacientes.forEach(paciente => { %>
+                <option value="<%= paciente.Id %>" <%= paciente.Id === turno.PacienteId ? 'selected' : '' %>><%= paciente.Nombre %></option>
+            <% }); %>
+        </select>
+        
         <li>
-            <label for="pacienteId">ID DEL PACIENTE</label>
-            <input type="number" name="pacienteId" id="pacienteId" value="<%= turno.PacienteId %>">
+            <label for="EstadoId">ID DEL ESTADO</label>
+            <input type="number" name="EstadoId" id="EstadoId" value="<%= turno.EstadoId %>">
         </li>
-        <li>
-            <label for="estadoId">ID DEL ESTADO</label>
-            <input type="number" name="estadoId" id="estadoId" value="<%= turno.EstadoId %>">
-        </li>
-        <!-- Puedes agregar más campos aquí si es necesario -->
+       
         <li>
             <button type="submit">GUARDAR CAMBIOS</button>
         </li>

@@ -21,11 +21,12 @@ export const getPacientes = () => {
 // Función para obtener un solo paciente
 export const getPacientebyId = (id) => {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM paciente WHERE id = ?', [id], (error, results) => {
+      pool.query('SELECT * FROM paciente WHERE Id = ?', [id],  
+         (error, results) => {
         if (error) {
           reject(error);
         } else {
-          resolve(results);
+          resolve(results[0]);
         }
       });
     });
@@ -50,7 +51,8 @@ export const insertPaciente = (paciente) => {
   // Función para borrar un paciente
   export const deletePaciente = (id) => {
     return new Promise((resolve, reject) => {
-      pool.query('DELETE FROM paciente WHERE id = ?', [id], (error, results) => {
+      pool.query('DELETE FROM paciente WHERE Id = ?', [id], 
+        (error, results) => {
         if (error) {
           reject(error);
         } else {
@@ -63,7 +65,7 @@ export const insertPaciente = (paciente) => {
   // Función para actualizar un paciente
   export const updatePaciente = (id, paciente) => {
     return new Promise((resolve, reject) => {
-      pool.query('UPDATE paciente SET ? WHERE id = ?', [paciente, id], 
+      pool.query('UPDATE paciente SET ? WHERE Id = ?', [paciente, id], 
         (error, results) => {
         if (error) {
           reject(error);
@@ -73,3 +75,26 @@ export const insertPaciente = (paciente) => {
       });
     });
   };
+
+  /*
+  export const deletePacienteController = async (req, res) => {
+    const pacienteId = req.params.id;
+
+    // Consulta si hay turnos asociados al paciente
+    const turnosAsociados = await consultarTurnosAsociados(pacienteId);
+
+    if (turnosAsociados.length > 0) {
+        // Hay turnos asociados, muestra un mensaje de error
+        res.status(400).send('No se puede eliminar el paciente debido a turnos asociados.');
+    } else {
+        // No hay turnos asociados, procede con la eliminación
+        await eliminarPaciente(pacienteId);
+        res.send('Paciente eliminado correctamente.');
+    }
+};
+
+  
+  
+  
+  
+  */

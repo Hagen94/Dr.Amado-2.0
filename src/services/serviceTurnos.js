@@ -4,7 +4,7 @@ de tu modelo y realicen cualquier lógica de negocio adicional
 
 */
 
-import { deleteTurno, getTurnoById, getTurnos, insertTurno, updateTurno, verificarTurno } from "../models/turnosModel.js";
+import { deleteTurno, getTurnoById, getTurnoByPacienteId, getTurnos, insertTurno, updateTurno, verificarTurno } from "../models/turnosModel.js";
 
 
 
@@ -24,6 +24,15 @@ export const getAllTurnos = async () => {
 export const getTurnoByIdService = async (id) => {
     try {
         const turno = await getTurnoById(id);
+        return turno;
+    } catch (error) {
+        throw error;
+    }
+}
+//funcion para traer turnos segun PacienteId
+export const getTurnoByPacienteIdService = async (id) => {
+    try {
+        const turno = await getTurnoByPacienteId(id);
         return turno;
     } catch (error) {
         throw error;
