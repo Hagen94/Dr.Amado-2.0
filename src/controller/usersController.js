@@ -2,10 +2,9 @@
 controla la respuesta de las rutas 
 */
 
-// controller.js
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { crearUsuarioService, deleteUsuarioService, getAllUsers, getEstadosTurnosService, getPerfilesService, getUsuarioService, updateUsuarioService } from '../services/serviceUsers.js';
+import { crearUsuarioService, deleteUsuarioService, filtrarUsuariosService, getAllUsers, getEstadosTurnosService, getPerfilesService, getUsuarioService, updateUsuarioService } from '../services/serviceUsers.js';
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -13,12 +12,24 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 //obtengo todos los usuarios
 export const getUsuariosController = async (req, res) => {
-  //traigo todos los usuarios
-  const usuarios = await getAllUsers();
-  //traigo los perfiles de usuaros y los estados
-  const estados = await getEstadosTurnosService();
-  const perfiles = await getPerfilesService();
- res.render(path.resolve(__dirname, '../../view/usuarios/usuarios.ejs'), {usuarios, estados, perfiles});
+    const filtro = req.query.filtro;
+    if(filtro) {
+        //traigo los usuarios filtrados
+        const usuarios = await filtrarUsuariosService(filtro);
+        //traigo los perfiles de usuaros y los estados
+        const estados = await getEstadosTurnosService();
+        const perfiles = await getPerfilesService();
+        res.render(path.resolve(__dirname, '../../view/usuarios/usuarios.ejs'), {usuarios, estados, perfiles});
+
+    }else{
+
+        //traigo todos los usuarios
+        const usuarios = await getAllUsers();
+        //traigo los perfiles de usuaros y los estados
+        const estados = await getEstadosTurnosService();
+        const perfiles = await getPerfilesService();
+        res.render(path.resolve(__dirname, '../../view/usuarios/usuarios.ejs'), {usuarios, estados, perfiles});
+    }
 }
 
 // voy a la ruta de crear usuario

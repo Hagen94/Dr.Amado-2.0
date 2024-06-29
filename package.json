@@ -11,11 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "fullcalendar": "^6.1.14",
     "fullcalendar-scheduler": "^6.1.14",
+    "jsonwebtoken": "^9.0.2",
     "method-override": "^3.0.0",
     "mysql2": "^3.10.0"
   }

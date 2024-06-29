@@ -15,6 +15,24 @@ export const getUsers = () => {
       });
     });
   };
+
+  //funcion para traer el usuario para verficar el login 
+export function getUserByNombre(Nombre) {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      'SELECT * FROM usuario WHERE Nombre = ?',
+      [Nombre],
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results[0]);
+        }
+      }
+    );
+  });
+}
+
   // Función para insertar un nuevo usuario
   export const insertUser = (user) => {
     return new Promise((resolve, reject) => {
@@ -109,3 +127,23 @@ export const getUsers = () => {
       });
     });
   }
+
+  //funcion para filtrar los pacientes de la base de datos
+export const filtrarUsuariosPorTodos = (columnaFiltro) => {
+  return new Promise((resolve, reject) => {
+      pool.query(`
+          SELECT *
+          FROM usuario
+          WHERE Nombre LIKE ? OR
+                Clave LIKE ? OR
+                EstadoId LIKE ? OR
+                PerfilId LIKE ? 
+      `, [`%${columnaFiltro}%`, `%${columnaFiltro}%`, `%${columnaFiltro}%`, `%${columnaFiltro}%`], (error, results) => {
+          if (error) {
+              reject(error);
+          } else {
+              resolve(results);
+          }
+      });
+  });
+};

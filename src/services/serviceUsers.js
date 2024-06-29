@@ -5,7 +5,7 @@ de tu modelo y realicen cualquier lógica de negocio adicional
 */
 
 // service.js
-import {deleteUser, getEstadosUsuarios, getPerfiles, getUsers, getUsersById, insertUser, updateUser} from '../models/usuariosModel.js'
+import {deleteUser, filtrarUsuariosPorTodos, getEstadosUsuarios, getPerfiles, getUserByNombre, getUsers, getUsersById, insertUser, updateUser} from '../models/usuariosModel.js'
 
 export const getAllUsers = async () => {
   try {
@@ -17,6 +17,17 @@ export const getAllUsers = async () => {
     throw error;
   }
 };
+
+//obtener usuario para validar 
+export const getUserByNombreService = async (Nombre) => {
+  try {
+      const user = await getUserByNombre(Nombre);
+      return user;
+  } catch (error) {
+      throw error;
+  }
+}
+
 // crear usuario
 export const crearUsuarioService = async (user) => {
   try {
@@ -73,6 +84,17 @@ export const getPerfilesService = async () => {
   try {
       const perfiles = await getPerfiles();
       return perfiles;
+  } catch (error) {
+      throw error;
+  }
+}
+
+//obtengo el usuario segun el filtro 
+
+export const filtrarUsuariosService = async (columnaFiltro) => {
+  try {
+      const filtrado = await filtrarUsuariosPorTodos(columnaFiltro);
+      return filtrado;
   } catch (error) {
       throw error;
   }

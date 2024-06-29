@@ -1,28 +1,26 @@
 import express from 'express';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
 import { createUser, deleteUsuarioController, getUsuariosController, mostrarFormularioCrearUsuario, mostrarFormularioEditarUsuario, updateUsuarioController } from '../controller/usersController.js';
+import { isAdmin, verifyToken } from '../middleware/jwt.js';
 
 const routerUuarios = express.Router();
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /*------------USUARIOS-------------*/
-routerUuarios.get('/',getUsuariosController);
+routerUuarios.get('/',verifyToken,isAdmin,  getUsuariosController);
 
 //voy a la ruta de crear usuario
-routerUuarios.get('/crearUsuario',  mostrarFormularioCrearUsuario);
+routerUuarios.get('/crearUsuario',verifyToken,isAdmin,   mostrarFormularioCrearUsuario);
 //crear usuario
-routerUuarios.post('/crearUsuario', createUser);
+routerUuarios.post('/crearUsuario', verifyToken,isAdmin,  createUser);
 
 //borrar usuario
-routerUuarios.delete('/deleteUsuario/:id',deleteUsuarioController);
+routerUuarios.delete('/deleteUsuario/:id',verifyToken,isAdmin, deleteUsuarioController);
 
 
 //voy a la ruta de editar
-routerUuarios.get('/obtenerUsuario/:id', mostrarFormularioEditarUsuario );
+routerUuarios.get('/obtenerUsuario/:id',verifyToken ,isAdmin, mostrarFormularioEditarUsuario );
 
 //editar usuario
-routerUuarios.put('/editarUsuario/:id', updateUsuarioController);
+routerUuarios.put('/editarUsuario/:id', verifyToken ,isAdmin, updateUsuarioController);
 
 
 

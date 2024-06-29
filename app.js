@@ -13,7 +13,8 @@ config();
 import bodyParser from 'body-parser';
 //importo method override
 import methodOverride from 'method-override';
-
+//importo cookie parser
+import cookieParser from 'cookie-parser'; //jwt
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
@@ -31,6 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Agregamos body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+//cofiguracion cookie-parser	para almacenar cookies cuando valido el token
+app.use(cookieParser());
 
 //agrego method override para metodos no soportados como put o delete
 app.use(methodOverride('_method'));

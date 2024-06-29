@@ -22,3 +22,8 @@ npm install method-override
 instalo full calendar
 
 npm install fullcalendar
+
+Validaciones 
+
+npm install jsonwebtoken
+npm install cookie-parser

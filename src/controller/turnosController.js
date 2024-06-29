@@ -4,14 +4,14 @@ controla la respuesta de las rutas
 // controller.js
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { crearTurnoService, deleteTurnoService, getAllTurnos, getEstadoTurnoService, getTurnoByIdService, updateTurnoService, verificarTurnoService } from '../services/serviceTurnos.js';
+import { crearTurnoService, deleteTurnoService, filtrarEstadosService, filtrarTurnosService, getAllTurnos, getEstadoTurnoService, getTurnoByIdService, updateTurnoService, verificarTurnoService } from '../services/serviceTurnos.js';
 import { getAllPacientes } from '../services/servicePacientes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 //obtener todos los turnos para el calendario
 export const getTurnosController = async (req, res) => {
-    console.log("Entro a getTurnosController")
+    
     try {
         //traigo todos los turnos
         const turnos = await getAllTurnos();
@@ -42,15 +42,28 @@ export const getTurnosController = async (req, res) => {
 }
 //obtener todos los turnos para la lista
  export const getListaTurnos = async (req, res) => {
-
     try {
-        //traigo todos los turnos
+        const filtro = req.query.filtro;
+        if(filtro) {
+            //traigo los turnos filtrados
+            const turnos = await filtrarTurnosService(filtro);
+            //traigo todos los pacientes
+            const pacientes = await getAllPacientes();
+            //traigo los estados del turno 
+            const estados = await filtrarEstadosService(filtro);
+            res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos":turnos,"pacientes":pacientes, "estados":estados})
+
+        }else{
+             //traigo todos los turnos
         const turnos = await getAllTurnos();
         //traigo todos los pacientes
         const pacientes = await getAllPacientes();
         //traigo los estados del turno 
         const estados = await getEstadoTurnoService();
-        res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos":turnos,"pacientes":pacientes, "estados":estados});
+        res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos":turnos,"pacientes":pacientes, "estados":estados})
+        }
+
+       ;
         
     } catch (error) {
         res.status(500).send(error)

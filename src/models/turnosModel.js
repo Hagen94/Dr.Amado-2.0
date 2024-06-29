@@ -139,3 +139,39 @@ export const verificarTurno = (turno) => {
       });
     });
   };
+
+  
+  //funcion para filtrar los pacientes de la base de datos
+export const filtrarTurnosPorTodos = (columnaFiltro) => {
+  return new Promise((resolve, reject) => {
+      pool.query(`
+          SELECT *
+          FROM turnos
+          WHERE Fecha LIKE ? OR
+                Hora LIKE ?
+      `, [ `%${columnaFiltro}%`, `%${columnaFiltro}%`], (error, results) => {
+          if (error) {
+              reject(error);
+          } else {
+              resolve(results);
+          }
+      });
+  });
+};
+
+// Función para traer Estados de turnos filtrados
+export const filtrarTurnosPorEstado = (columnaFiltro) => {
+  return new Promise((resolve, reject) => {
+      pool.query(`
+          SELECT *
+          FROM estadoturno
+          WHERE estado LIKE ?
+      `, [`%${columnaFiltro}%`], (error, results) => {
+          if (error) {
+              reject(error);
+          } else {
+              resolve(results);
+          }
+      });
+  });
+};
