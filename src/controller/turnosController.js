@@ -29,8 +29,9 @@ export const getTurnosController = async (req, res) => {
                 start: `${fecha}T${turno.Hora}`, // usa FechaFecha y turno.Hora`
                     // usa FechaHora como start
                 // Puedes agregar más propiedades aquí si las necesitas
-                descripcion: `Paciente: ${paciente.Nombre} Hora: ${turno.Hora}`,
+                descripcion: `Paciente: ${paciente.Nombre}\n Hora: ${turno.Hora}\n Telefono: ${paciente.Telefono} \n Direccion: ${paciente.Direccion}\n Numero Asociado: ${paciente.NumeroAsociado}`,
                 color: 'red',
+                
             };
         });
        // console.log(eventos)

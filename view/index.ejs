@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/home.css">
     
     <script>
+    
 
         document.addEventListener('DOMContentLoaded', function() {
           const calendarEl = document.getElementById('calendar')
@@ -24,12 +25,14 @@
               list: 'Lista'},
               //info del turno
               //salta una descripcion del turno
-              /*
-              eventClick: function() {
-                const modal = $('#exampleModal'); 
-                modal.modal("show")
-             //  alert('Descripción del turno: ' + info.event.extendedProps.descripcion);
-              },*/
+              
+              eventClick: function(info) {
+  
+               alert('Descripción del turno: \n ' + info.event.extendedProps.descripcion );
+               
+            
+            
+              },/*
               /*para editar desde el calendario
               dateClick: function(fecha) {
                 const modal = $('#exampleModal'); 
