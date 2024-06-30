@@ -111,6 +111,22 @@ export const getObraSocial = () => {
     });
 };
 
+
+//funcion para filtrar los pacientes de por nombre
   
-  
+export const filtrarPacientesPorNombre = (columnaFiltro) => {
+  return new Promise((resolve, reject) => {
+      pool.query(`
+          SELECT *
+          FROM Paciente
+          WHERE Nombre LIKE ?
+      `, [ `%${columnaFiltro}%`], (error, results) => {
+          if (error) {
+              reject(error);
+          } else {
+              resolve(results);
+          }
+      });
+  });
+};
   

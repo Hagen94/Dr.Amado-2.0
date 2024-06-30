@@ -7,36 +7,35 @@ import { fileURLToPath } from 'url';
 import { crearPacienteService, deletePacienteService, filtrarPacientesPorTodosServices, getAllPacientes, getObraSocialService, getPacienteByIdService, updatePacienteService } from '../services/servicePacientes.js';
 
 import { getTurnoByPacienteIdService } from '../services/serviceTurnos.js';
-
+import flash from 'connect-flash';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /*
-traigo los usuarios y los muestro en el home
+traigo los pacientes y los muestro en la lista
 */ 
 export const pacientes = async (req, res) => {
     const filter = req.query.filtro
+    const mensajeError = req.flash('error'); // Accede al mensaje de error
     if(filter){
         const pacientes = await filtrarPacientesPorTodosServices(filter);
         const obraSociales = await getObraSocialService();
-        res.render(path.resolve(__dirname, '../../view/pacientes/pacientes.ejs'), {"pacientes":pacientes, "obraSociales":obraSociales});
+        res.render(path.resolve(__dirname, '../../view/pacientes/pacientes.ejs'), {"pacientes":pacientes, "obraSociales":obraSociales, "mensajeError": mensajeError});
     }else{//traigo todos los pacientes
     const pacientes = await getAllPacientes();
     const obraSociales = await getObraSocialService();
-    res.render(path.resolve(__dirname, '../../view/pacientes/pacientes.ejs'), {"pacientes":pacientes, "obraSociales":obraSociales});
-
+    res.render(path.resolve(__dirname, '../../view/pacientes/pacientes.ejs'), {"pacientes":pacientes, "obraSociales":obraSociales, "mensajeError": mensajeError}); 
     }
-    
-   
 }
-//crear paciente
+//Voy al formulario para crear pacientes
 export const mostrarFormularioCrearPaciente = (req, res) => {
     res.render(path.resolve(__dirname, '../../view/pacientes/crearPaciente.ejs'));
 }
-
+//envio los datos para crear un paciente
 export const crearPacienteController = async (req, res) => {
     //envio el nuevo paciente al servicio.
     const pacienteNuevo = await crearPacienteService(req.body);
     res.redirect('/pacientes')
+    
    
 }
 //borrar paciente
@@ -47,7 +46,8 @@ export const deletePacienteController = async (req, res) => {
     const turnosAsociados = await getTurnoByPacienteIdService(pacienteId);
     if (turnosAsociados.length > 0) {
         // Hay turnos asociados, muestra un mensaje o redirige con un error
-        res.status(400).send('No se puede eliminar el paciente debido a turnos asociados.');
+        req.flash('error', 'No se puede eliminar el paciente debido a turnos asociados.');
+        res.redirect('/pacientes');
     } else {
         // No hay turnos asociados, procede con la eliminación
         await deletePacienteService(pacienteId);

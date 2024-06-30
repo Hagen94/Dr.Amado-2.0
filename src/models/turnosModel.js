@@ -126,6 +126,96 @@ export const verificarTurno = (turno) => {
     });
   }
 
+
+  
+  //funcion para filtrar los pacientes de la base de datos
+export const filtrarTurnosPorFecha = (columnaFiltro) => {
+  return new Promise((resolve, reject) => {
+      pool.query(`
+          SELECT *
+          FROM turnos
+          WHERE Fecha LIKE ? 
+      `, [ `%${columnaFiltro}%`], (error, results) => {
+          if (error) {
+              reject(error);
+          } else {
+              resolve(results);
+          }
+      });
+  });
+};
+  //funcion para filtrar los pacientes de la base de datos
+  export const filtrarTurnosPorHora = (columnaFiltro) => {
+    return new Promise((resolve, reject) => {
+        pool.query(`
+            SELECT *
+            FROM turnos
+            WHERE Hora LIKE ? 
+        `, [ `%${columnaFiltro}%`], (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+  };
+
+//Funcion para filtrar los estados Id en la tabla turnos
+export const filtrarEstadoTurnos = (columnaFiltro) => {
+  return new Promise((resolve, reject) => {
+      pool.query(`
+          SELECT *
+          FROM turnos
+          WHERE EstadoId LIKE ?
+      `, [ `%${columnaFiltro}%`], (error, results) => {
+          if (error) {
+              reject(error);
+          } else {
+            console.log("El estadoId del modelo es: "+results)
+              resolve(results);
+          }
+      });
+  });
+};
+//Funcion para filtrar los PacienteId en la tabla turnos
+export const filtrarPacientesTurnos = (columnaFiltro) => {
+  return new Promise((resolve, reject) => {
+      pool.query(`
+          SELECT *
+          FROM turnos
+          WHERE PacienteId LIKE ?
+      `, [ `%${columnaFiltro}%`], (error, results) => {
+          if (error) {
+              reject(error);
+          } else {
+            console.log("El estadoId del modelo es: "+results)
+              resolve(results);
+          }
+      });
+  });
+}
+
+
+/*----------------------ESTADO TURNOS--------------------------*/
+//Funcion para buscar los estados de la tabla estadoturno
+export const filtrarTurnosPorEstado = (columnaFiltro) => {
+  return new Promise((resolve, reject) => {
+      pool.query(`
+          SELECT *
+          FROM estadoturno
+          WHERE LOWER(estado) LIKE ?
+      `, [`%${columnaFiltro}%`], (error, results) => {
+          if (error) {
+              reject(error);
+          } else {
+              resolve(results);
+          }
+      });
+  });
+};
+
+
   //traigo el estado de los turnos
 
   export const getEstadoTurnos = () => {
@@ -139,39 +229,3 @@ export const verificarTurno = (turno) => {
       });
     });
   };
-
-  
-  //funcion para filtrar los pacientes de la base de datos
-export const filtrarTurnosPorTodos = (columnaFiltro) => {
-  return new Promise((resolve, reject) => {
-      pool.query(`
-          SELECT *
-          FROM turnos
-          WHERE Fecha LIKE ? OR
-                Hora LIKE ?
-      `, [ `%${columnaFiltro}%`, `%${columnaFiltro}%`], (error, results) => {
-          if (error) {
-              reject(error);
-          } else {
-              resolve(results);
-          }
-      });
-  });
-};
-
-// Función para traer Estados de turnos filtrados
-export const filtrarTurnosPorEstado = (columnaFiltro) => {
-  return new Promise((resolve, reject) => {
-      pool.query(`
-          SELECT *
-          FROM estadoturno
-          WHERE estado LIKE ?
-      `, [`%${columnaFiltro}%`], (error, results) => {
-          if (error) {
-              reject(error);
-          } else {
-              resolve(results);
-          }
-      });
-  });
-};

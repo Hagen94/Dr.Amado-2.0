@@ -16,6 +16,15 @@ import methodOverride from 'method-override';
 //importo cookie parser
 import cookieParser from 'cookie-parser'; //jwt
 const __dirname = dirname(fileURLToPath(import.meta.url));
+//iporto express session
+import session from 'express-session';
+//importo flash
+import flash from 'connect-flash';
+
+
+
+
+
 
 /**
  * formateo para usar ejs
@@ -34,6 +43,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //cofiguracion cookie-parser	para almacenar cookies cuando valido el token
 app.use(cookieParser());
+
+// Configura express-session
+app.use(session({
+  secret: 'Dr. Amado 2024',
+  resave: false,
+  saveUninitialized: true,
+}));
+// Configura los mensajes flash
+app.use(flash());
 
 //agrego method override para metodos no soportados como put o delete
 app.use(methodOverride('_method'));

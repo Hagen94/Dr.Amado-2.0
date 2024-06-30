@@ -4,7 +4,7 @@ de tu modelo y realicen cualquier lógica de negocio adicional
 
 */
 
-import { deleteTurno, filtrarTurnosPorEstado, filtrarTurnosPorTodos, getEstadoTurnos, getTurnoById, getTurnoByPacienteId, getTurnos, insertTurno, updateTurno, verificarTurno } from "../models/turnosModel.js";
+import { deleteTurno, filtrarEstadoTurnos, filtrarPacientesTurnos, filtrarTurnosPorEstado, filtrarTurnosPorFecha, filtrarTurnosPorHora, getEstadoTurnos, getTurnoById, getTurnoByPacienteId, getTurnos, insertTurno, updateTurno, verificarTurno } from "../models/turnosModel.js";
 
 
 
@@ -84,7 +84,7 @@ export const updateTurnoService = async (id, turno) => {
 }
 
 
-//funcion para obtener el estado del turno 
+//funcion para obtener el estado de la tabla estadoturnos
 
 export const getEstadoTurnoService = async () => {
     try {
@@ -95,10 +95,19 @@ export const getEstadoTurnoService = async () => {
     }
 }
 
-//funcion para filtrar turnos 
-export const filtrarTurnosService = async (turno) => {
+//funcion para filtrar turnos Fecha
+export const filtrarTurnosFechaService = async (turno) => {
     try {
-        const turnos = await filtrarTurnosPorTodos(turno);
+        const turnos = await filtrarTurnosPorFecha(turno);
+        return turnos;
+    } catch (error) {
+        throw error;
+    }
+}
+//funcion para filtrar turnos Hora
+export const filtrarTurnosHoraService = async (turno) => {
+    try {
+        const turnos = await filtrarTurnosPorHora(turno);
         return turnos;
     } catch (error) {
         throw error;
@@ -110,7 +119,31 @@ export const filtrarTurnosService = async (turno) => {
 export const filtrarEstadosService = async (columnaFiltro) => {
     try {
         const estados = await filtrarTurnosPorEstado(columnaFiltro);
+        console.log("El estado en el servicio es: "+ estados[0].id);
         return estados;
+    } catch (error) {
+        throw error;
+    }
+}
+
+//funcion para filtrar los turnos por estado ID
+
+export const filtrarTurnosPorEstadoIdService = async (columnaFiltro) => {
+    try {
+        const turnos = await filtrarEstadoTurnos(columnaFiltro);
+        return turnos;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+//funcion para filtrar los turnos por Paciente ID
+
+export const filtrarTurnosPorPacienteIdService = async (columnaFiltro) => {
+    try {
+        const turnos = await filtrarPacientesTurnos(columnaFiltro);
+        return turnos;
     } catch (error) {
         throw error;
     }

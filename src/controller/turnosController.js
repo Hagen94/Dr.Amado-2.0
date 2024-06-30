@@ -4,8 +4,8 @@ controla la respuesta de las rutas
 // controller.js
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { crearTurnoService, deleteTurnoService, filtrarEstadosService, filtrarTurnosService, getAllTurnos, getEstadoTurnoService, getTurnoByIdService, updateTurnoService, verificarTurnoService } from '../services/serviceTurnos.js';
-import { getAllPacientes } from '../services/servicePacientes.js';
+import { crearTurnoService, deleteTurnoService, filtrarEstadosService, filtrarTurnosFechaService, filtrarTurnosHoraService, filtrarTurnosPorEstadoIdService, filtrarTurnosPorPacienteIdService,  getAllTurnos, getEstadoTurnoService, getTurnoByIdService, updateTurnoService, verificarTurnoService } from '../services/serviceTurnos.js';
+import { filtrarPacientesPorNombreService, getAllPacientes } from '../services/servicePacientes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -41,34 +41,65 @@ export const getTurnosController = async (req, res) => {
     }
 }
 //obtener todos los turnos para la lista
- export const getListaTurnos = async (req, res) => {
+export const getListaTurnos = async (req, res) => {
     try {
         const filtro = req.query.filtro;
-        if(filtro) {
-            //traigo los turnos filtrados
-            const turnos = await filtrarTurnosService(filtro);
-            //traigo todos los pacientes
+        // Verifica si el valor es una hora (por ejemplo, "14:00" o "15:00")
+        const esHora = /^([01]\d|2[0-3])(:[0-5]\d)?$/.test(filtro);
+        // Verifica si el valor es una fecha válida (AAAA-MM-DD)
+        const esFechaValida = /^\d{4}[-/]\d{2}[-/]\d{2}$/.test(filtro);
+
+        //verifico que el filtro exista y luego verifico que tipo de filtro es
+       if(filtro){
+             // Filtrar por fecha y hora
+        if (esFechaValida) {
+            const turnos = await filtrarTurnosFechaService(filtro);
             const pacientes = await getAllPacientes();
-            //traigo los estados del turno 
-            const estados = await filtrarEstadosService(filtro);
-            res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos":turnos,"pacientes":pacientes, "estados":estados})
-
-        }else{
-             //traigo todos los turnos
-        const turnos = await getAllTurnos();
-        //traigo todos los pacientes
-        const pacientes = await getAllPacientes();
-        //traigo los estados del turno 
-        const estados = await getEstadoTurnoService();
-        res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos":turnos,"pacientes":pacientes, "estados":estados})
+            const estados = await getEstadoTurnoService();
+            res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos": turnos, "pacientes": pacientes, "estados": estados});
+        }else if(esHora){
+            const turnos = await filtrarTurnosHoraService(filtro);
+            const pacientes = await getAllPacientes();
+            const estados = await getEstadoTurnoService();
+            res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos": turnos, "pacientes": pacientes, "estados": estados});
         }
-
-       ;
-        
+        // Filtrar por estado
+        else if (filtro.toLowerCase() === "ocupado" || filtro.toLowerCase() === "libre") {
+            const estados = await filtrarEstadosService(filtro.toLowerCase());
+            const turnos = await filtrarTurnosPorEstadoIdService(estados[0].id);
+            console.log(turnos)
+            const pacientes = await getAllPacientes();
+            res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos": turnos, "pacientes": pacientes, "estados": estados});
+        }else{
+            //traigo los pacientes filtrados 
+            const pacientes = await filtrarPacientesPorNombreService(filtro);
+            console.log("Estos son los pacientes filtrados: "+ pacientes)
+            //traigo todos los turnos filtrdos por el Id del paciente
+            const turnos= [];
+            // Itero sobre cada paciente y obtengo sus turnos
+            for (const paciente of pacientes) {
+                const turnosPaciente = await filtrarTurnosPorPacienteIdService(paciente.Id);
+                // Agrego los turnos del paciente al arreglo general
+                turnos.push(...turnosPaciente);
+            }
+            console.log("Estos son los turnos filtrado por pacientes: "+ turnos)
+            //traigo los pacientes pero voy a necesitar filtrar estados y turnos
+            //traigo todos estados de los turnos 
+            const estados = await getEstadoTurnoService();
+            
+            res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos": turnos, "pacientes": pacientes, "estados": estados});
+        }
+       }else {// Sin filtro específi
+            const turnos = await getAllTurnos();
+            const pacientes = await getAllPacientes();
+            const estados = await getEstadoTurnoService();
+            res.render(path.resolve(__dirname, '../../view/turnos/turnos.ejs'), {"turnos": turnos, "pacientes": pacientes, "estados": estados});
+        }
     } catch (error) {
-        res.status(500).send(error)
+        res.status(500).send(error);
     }
-}
+};
+
 
 //ir a la ruta para crear un turno
 export const mostrarFormularioCrearTurno = async (req, res) => {

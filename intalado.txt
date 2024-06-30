@@ -27,3 +27,5 @@ Validaciones
 
 npm install jsonwebtoken
 npm install cookie-parser
+
+instale flash y express-session para mensajes flash

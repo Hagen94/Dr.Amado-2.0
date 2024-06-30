@@ -22,7 +22,7 @@
     <section class="listaPacientes">
       <article class="agregarPacientes">
         <section class="listado">
-          <h1>LISTADO DE PRODUCTOS</h1>
+          <h1>LISTADO DE PACIENTES</h1>
         </section>
         <%- include ('../partials/crea.ejs', {ruta: '/pacientes/crearPaciente'})  %>
       </article>
@@ -60,7 +60,14 @@
           </article>
         
         <% }); %>
-      
+       <p>
+      <% if (mensajeError) { %>
+        <div class="alert alert-info">
+            <%= mensajeError %>
+        </div>
+      <% } %>
+
+         </p>
         <div class="containerPagination">
           <button class="btnPrev"><<</button>
           <div id="pagination">   </div>

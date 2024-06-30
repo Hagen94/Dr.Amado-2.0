@@ -16,11 +16,11 @@
     <ul>
         <li>
             <label for="Nombre">NOMBRE</label>
-            <input type="text" name="Nombre" id="Nombre" value="<%= paciente.Nombre %>">
+            <input type="text" name="Nombre" id="Nombre" value="<%= paciente.Nombre %>" maxlength="30" minlength="5">
         </li>
         <li>
             <label for="DNI">DNI</label>
-            <input type="text" name="DNI" id="DNI" value="<%= paciente.DNI %>">
+            <input type="text" name="DNI" id="DNI" value="<%= paciente.DNI %>"  maxlength="10" minlength="5">
         </li>
                 <label for="ObraSocialId">Selecciona una obra social:</label>
                 <select id="ObraSocialId" name="ObraSocialId">
@@ -32,15 +32,15 @@
                 </select>
         <li>
             <label for="NumeroAsociado">NUMERO ASOCIADO</label>
-            <input type="text" name="NumeroAsociado" id="NumeroAsociado" value="<%= paciente.NumeroAsociado %>">
+            <input type="text" name="NumeroAsociado" id="NumeroAsociado" value="<%= paciente.NumeroAsociado %> " maxlength="15">
         </li>
         <li>
             <label for="Direccion">DIRECCION</label>
-            <input type="text" name="Direccion" id="Direccion" value="<%= paciente.Direccion %>">
+            <input type="text" name="Direccion" id="Direccion" value="<%= paciente.Direccion %>"  maxlength="30" minlength="5">
         </li>
         <li>
             <label for="Telefono">TELEFONO</label>
-            <input type="text" name="Telefono" id="Telefono" value="<%= paciente.Telefono %>">
+            <input type="text" name="Telefono" id="Telefono" value="<%= paciente.Telefono %>"  maxlength="30" minlength="5">
         </li>
         <li>
             <button type="submit">GUARDAR CAMBIOS</button>

@@ -50,3 +50,8 @@
     cursor: pointer;
 }
 
+.alert-info{
+    font-size: 2rem;
+    font-weight: bold;
+    color: red;
+}
